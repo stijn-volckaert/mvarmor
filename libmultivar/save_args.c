@@ -539,17 +539,23 @@ void save_args(pid_t pid, struct syscall_args *syscall,
     case SYS_unlink:
     case SYS_readlink:
     case SYS_chmod:
+    case SYS_chown:
         STRARG(0);
         break;
     case SYS_umask:
     case SYS_gettimeofday:
     case SYS_getrlimit:
-    case SYS_getuid:
-    case SYS_getgid:
+	case SYS_getuid:
+	case SYS_getgid:
+    case SYS_setuid:
+    case SYS_setgid:
     case SYS_geteuid:
     case SYS_getegid:
     case SYS_getppid:
     case SYS_setsid:
+        break;
+    case SYS_setgroups:
+		sizes[1] = args[0];
         break;
     case SYS_capget:
         sizes[0] = sizeof(struct __user_cap_header_struct);
